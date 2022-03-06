@@ -8,74 +8,41 @@ function App() {
     const { handleSubmit, formState: { errors }, register, watch } = useForm();
     let [amountBananen, setBananen] = useState(0);
     let [amountAardbeien, setAardbeien] = useState(0);
+    let [amountAppels, setAppels] = useState(0);
     let [amountKiwis, setKiwis] = useState(0);
     const selectedDeliverFrequency = watch('deliverFrequency');
-
 
     function onFormSubmit(data) {
         console.log(data);
         console.log("Bananen: " + amountBananen);
         console.log("Aardbeien: " + amountAardbeien);
-    }
-
-    function addKiwis(){
-        setKiwis(amountKiwis + 1);
-    }
-
-    function substractKiwis(){
-            setKiwis(amountKiwis - 1)
+        console.log("Appels: " + amountAppels);
+        console.log("Kiwis: " + amountKiwis);
     }
 
     return (
         <>
             <h1>Fruitmand bezorgservice</h1>
-            <div id="fruitbox">
-                <div>🍌 Bananen</div>
-                <button
-                    type="button"
-                    onClick={() => {
-                        setBananen(amountBananen - 1)
-                    }}
-                    disabled={amountBananen === 0}
-                >-
-                </button>
-                <div>{amountBananen}</div>
-                <button
-                    type="button"
-                    onClick={() => {
-                        setBananen(amountBananen + 1)
-                    }}
-                >+
-                </button>
-            </div>
-            <div id="fruitbox">
-                <div>🍓 Aardbeien</div>
-                <button
-                    type="button"
-                    onClick={() => {
-                        setAardbeien(amountAardbeien - 1)
-                    }}
-                    disabled={amountAardbeien === 0}
-                >-
-                </button>
-                <div>{amountAardbeien}</div>
-                <button
-                    type="button"
-                    onClick={() => {
-                        setAardbeien(amountAardbeien + 1)
-                    }}
-                >+
-                </button>
-            </div>
-
-
             <Fruitbox
-                fruitDescription="Kiwi"
-                fruitAmount={amountKiwis}
-                fruitAdder= {addKiwis}
-                fruitSub={substractKiwis}
+                fruitDescription="🍌 Bananen"
+                fruitAmount={amountBananen}
+                fruitSetter={setBananen}
             />
-
+            <Fruitbox
+                fruitDescription="🍓 Aardbeien"
+                fruitAmount={amountAardbeien}
+                fruitSetter={setAardbeien}
+            />
+            <Fruitbox
+                fruitDescription="🍏 Appel"
+                fruitAmount={amountAppels}
+                fruitSetter={setAppels}
+            />
+            <Fruitbox
+                fruitDescription="🥝 Kiwi"
+                fruitAmount={amountKiwis}
+                fruitSetter={setKiwis}
+            />
             <span>
                 <button
                     type="button"
@@ -83,15 +50,17 @@ function App() {
                     onClick={() => {
                         setBananen(0);
                         setAardbeien(0);
+                        setKiwis(0);
+                        setAppels(0);
                     }}
                 >reset</button>
             </span>
             <form onSubmit={handleSubmit(onFormSubmit)}>
+                {errors.fName && <p id="validationMessage">{errors.fName.message}</p>}
+                {errors.lName && <p id="validationMessage">{errors.lName.message}</p>}
+                {errors.age && <p id="validationMessage">{errors.age.message}</p>}
                 <table>
                     <tbody>
-                    <tr>{errors.fName && <div id="validationMessage">{errors.fName.message}</div>}</tr>
-                    <tr>{errors.lName && <div id="validationMessage">{errors.lName.message}</div>}</tr>
-                    <tr>{errors.age && <div id="validationMessage">{errors.age.message}</div>}</tr>
                     <tr>
                         <td>Voornaam</td>
                         <td>
@@ -103,7 +72,6 @@ function App() {
                                     value: 3,
                                     message: "Voornaam moet minimaal 3 karakters bevatten"
                                 }
-
                             })}
                             id="fName"
                             />
@@ -124,11 +92,11 @@ function App() {
                             {...register("age", {
                                 min: {
                                     value: 18,
-                                    message: "Minimaal 18 jaar"
+                                    message: "* minimaal 18 jaar"
                                 },
                                 max: {
                                     value: 99,
-                                    message: "Maximaal 99 jaar"
+                                    message: "* maximaal 99 jaar"
                                 }
                             })}
                             type="number"

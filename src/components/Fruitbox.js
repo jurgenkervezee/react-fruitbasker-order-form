@@ -1,24 +1,23 @@
 import React from 'react';
 
 function Fruitbox({
-                      fruitDescription,
-                      fruitAmount,
-                      fruitAdder,
-                      fruitSub
-                    }){
+                   fruitDescription,
+                   fruitAmount,
+                   fruitSetter
+                   }){
     return(
         <div id="fruitbox">
             <div>{fruitDescription}</div>
             <button
                 type="button"
-                onClick={fruitSub}
+                onClick={ () => {fruitSetter(fruitAmount - 1)}}
                 disabled={fruitAmount === 0}
             >-
             </button>
             <div>{fruitAmount}</div>
             <button
                 type="button"
-                onClick={fruitAdder}
+                onClick={ () => {fruitSetter(fruitAmount + 1)}}
             >+
             </button>
         </div>
