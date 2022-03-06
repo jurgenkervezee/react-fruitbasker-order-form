@@ -9,8 +9,8 @@ div{
 
 #fruitbox{
     border: black solid 1px;
-    background-color: beige;
-    border-radius: 25px;
+    background-color: honeydew;
+    border-radius: 10px;
     display: block;
     margin: 20px;
     text-align:center;
@@ -21,4 +21,8 @@ div{
 
 form{
     margin-left: 20px;
+}
+#validationMessage{
+    font-size: small;
+    color: red;
 }
