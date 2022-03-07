@@ -1,0 +1,28 @@
+button{
+    text-decoration: none;
+    display: inline-block;
+}
+div{
+    display: inline-block;
+    padding: 10px;
+}
+
+#fruitbox{
+    border: black solid 1px;
+    background-color: honeydew;
+    border-radius: 10px;
+    display: block;
+    margin: 20px;
+    text-align:center;
+}
+#resetBtn{
+    margin: 20px;
+}
+
+form{
+    margin-left: 20px;
+}
+#validationMessage{
+    font-size: small;
+    color: red;
+}
