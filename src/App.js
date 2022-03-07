@@ -10,6 +10,8 @@ function App() {
     let [amountAardbeien, setAardbeien] = useState(0);
     let [amountAppels, setAppels] = useState(0);
     let [amountKiwis, setKiwis] = useState(0);
+    let [termsAndConditionsValue, toggleTermsAndConditionsValue] = useState(false);
+    let [deliverMomentValue, toggleDeliverMoment] = useState('morning');
     const selectedDeliverFrequency = watch('deliverFrequency');
 
     function onFormSubmit(data) {
@@ -18,6 +20,7 @@ function App() {
         console.log("Aardbeien: " + amountAardbeien);
         console.log("Appels: " + amountAppels);
         console.log("Kiwis: " + amountKiwis);
+        console.log("Bezorgen: " + deliverMomentValue)
     }
 
     return (
@@ -133,18 +136,21 @@ function App() {
                     <tr>
                         <td>Bezorgmoment</td>
                         <td>
+
                             <input
-                                {...register("deliverMomentMorning")}
                                 type="radio"
+                                checked={deliverMomentValue==="morning"}
+                                onChange={(e)=> {toggleDeliverMoment(e.target.value)}}
                                 name="deliveryMoment"
                                 id="morning"
-                                value="ochtend"/>ochtend
+                                value="morning"/>ochtend
                             <input
-                                {...register("deliverMomentEvening")}
                                 type="radio"
+                                checked={deliverMomentValue==="evening"}
+                                onChange={(e)=> {toggleDeliverMoment(e.target.value)}}
                                 name="deliveryMoment"
                                 id="evening"
-                                value="avond"/>avond
+                                value="evening"/>avond
                         </td>
                     </tr>
                     </tbody>
@@ -161,6 +167,8 @@ function App() {
                     {...register("termsAndConditions")}
                     type="checkbox"
                     id="termsAndConditions"
+                    checked={termsAndConditionsValue}
+                    onChange={() => {toggleTermsAndConditionsValue(!termsAndConditionsValue)}}
                 />Ik ga akkoord met de voorwaarden<br/>
                 <button type="submit">Versturen</button>
             </form>
